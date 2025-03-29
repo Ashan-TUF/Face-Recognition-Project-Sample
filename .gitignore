@@ -1,0 +1,39 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore Virtual Environment
+venv/
+.env/
+*.env
+
+# Ignore IDE and Editor files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Ignore Flask and Deployment Files
+instance/
+config.py
+*.log
+
+# Ignore dependencies
+*.egg-info/
+dist/
+build/
+
+# Ignore database files
+*.sqlite3
+*.db
+
+# Ignore uploads
+uploads/
+media/
+
+# Ignore compiled C files
+*.so
+
+# Ignore Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
