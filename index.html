@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        form {
+            margin: 20px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Face Recognition System</h1>
+
+    <!-- Register New Face -->
+    <h2>Register a Face</h2>
+    <form id="registerForm">
+        <input type="text" id="name" placeholder="Enter Name" required>
+        <input type="file" id="registerFile" required>
+        <button type="submit">Register</button>
+    </form>
+    <p id="registerStatus"></p>
+
+    <!-- Recognize Face -->
+    <h2>Recognize a Face</h2>
+    <form id="recognizeForm">
+        <input type="file" id="recognizeFile" required>
+        <button type="submit">Recognize</button>
+    </form>
+    <p id="recognitionResult"></p>
+
+    <script>
+        document.getElementById("registerForm").onsubmit = async function(event) {
+            event.preventDefault();
+            
+            let formData = new FormData();
+            formData.append("name", document.getElementById("name").value);
+            formData.append("imagefile", document.getElementById("registerFile").files[0]);
+
+            let response = await fetch("/register", {
+                method: "POST",
+                body: formData
+            });
+
+            let result = await response.json();
+            document.getElementById("registerStatus").innerText = result.message;
+        };
+
+        document.getElementById("recognizeForm").onsubmit = async function(event) {
+            event.preventDefault();
+
+            let formData = new FormData();
+            formData.append("imagefile", document.getElementById("recognizeFile").files[0]);
+
+            let response = await fetch("/detect", {
+                method: "POST",
+                body: formData
+            });
+
+            let result = await response.json();
+            document.getElementById("recognitionResult").innerText = "Matched: " + result.matches.join(", ");
+        };
+    </script>
+</body>
+</html>
