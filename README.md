@@ -5,3 +5,5 @@ pip install cmake dlib
 pip install --upgrade pip setuptools wheel
 
 pip install opencv-python
+
+python app.py
